@@ -42,5 +42,12 @@ public class Produit
 	{
 		this.qte = qte;
 	}
+	
+	public void piocherStock() throws Exception
+    {
+            if (qte == 0) throw new Exception("Quantite insuffisante dans le stock");
+            else qte--;
+    }
+
 
 }
