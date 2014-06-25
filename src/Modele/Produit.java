@@ -45,7 +45,7 @@ public class Produit
 	
 	public void piocherStock() throws Exception
     {
-            if (qte == 0) throw new Exception("Quantite insuffisante dans le stock");
+            if (qte == 0) throw new Exception("Quantite insuffisante de "+nom+" dans le stock");
             else qte--;
     }
 

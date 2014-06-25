@@ -13,6 +13,7 @@ public enum euro implements Piece
 	DEUXEUROS  (2);
 	
 	private double value;
+	private int qte;
 	
 	private euro (double v)
 	{
@@ -23,6 +24,16 @@ public enum euro implements Piece
 	public double getValeur() 
 	{
 		return value;
+	}
+	
+	public int getQte()
+	{
+		return qte;
+	}
+	
+	public void setQte(int qte)
+	{
+		this.qte = qte;
 	}
 	
 	public String toString()
