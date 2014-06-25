@@ -13,6 +13,11 @@ public class Produit
 		this.qte = qte;
 	}
 	
+	public String toString()
+	{
+		return nom + " : " + prix + "€";
+	}
+	
 	public double getPrix() 
 	{
 		return prix;
