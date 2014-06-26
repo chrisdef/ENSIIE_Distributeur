@@ -1,5 +1,6 @@
 package Modele;
 
+
 public class Produit 
 {
 	private String nom;
@@ -20,7 +21,7 @@ public class Produit
 	
 	public double getPrix() 
 	{
-		return prix;
+		return (double)Math.round(prix * 100) / 100;
 	}
 	
 	public void setPrix(double prix) 

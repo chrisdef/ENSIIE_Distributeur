@@ -23,7 +23,7 @@ public enum euro implements Piece
 	@Override
 	public double getValeur() 
 	{
-		return value;
+		return (double)Math.round(value * 100) / 100;
 	}
 	
 	public int getQte()
@@ -34,6 +34,16 @@ public enum euro implements Piece
 	public void setQte(int qte)
 	{
 		this.qte = qte;
+	}
+	
+	public void retirer()
+	{
+		if(qte > 0) qte--;
+	}
+	
+	public void ajouter()
+	{
+		qte++;
 	}
 	
 	public String toString()
