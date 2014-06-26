@@ -95,7 +95,7 @@ public class Distributeur<T extends Produit> {
 	{
 		if(produit_select == null)
 		{
-			afficher_message("Rendu : "+getSoldeClient()+"€");
+			if(act)	afficher_message("Rendu : "+getSoldeClient()+"€");
 			pieces_inserees.clear();
 			return true;
 		}
@@ -103,24 +103,22 @@ public class Distributeur<T extends Produit> {
 		double prix = produit_select.getPrix();
 		double a_rendre = solde - prix;
 		a_rendre = (double)Math.round(a_rendre * 100.00) / 100.00;
-		System.out.println("Je dois rendre "+a_rendre+"€.");
+		
+		if (act) afficher_message("Rendu : "+a_rendre+"€");
 		
 		// Chercher les pieces qui peuvent etre rendues dans les pieces inserees
-		for(Piece p : pieces_inserees)
+		for(int i = 0 ; i < pieces_inserees.size() ; i++)
 		{
 			if(a_rendre == 0 && act == false) return true;
-			if(p.getValeur() <= a_rendre)
+			if(pieces_inserees.get(i).getValeur() <= a_rendre && pieces_inserees.get(i).getQte() > 0)
 			{
-				a_rendre -= p.getValeur();
+				a_rendre -= pieces_inserees.get(i).getValeur();
 				a_rendre = (double)Math.round(a_rendre * 100) / 100;
 				if (act)
 				{
-					//pieces_inserees.remove(p);
+					pieces_inserees.remove(i);
 				}
-			}
-			else 
-			{
-				System.out.println("Je dois rendre "+a_rendre+"€. Je peux pas rendre la piece de "+p.toString());
+				i--;
 			}
 		}
 		// Chercher les pieces qui peuvent etre rendues dans le stock machine
@@ -222,14 +220,17 @@ public class Distributeur<T extends Produit> {
 		stock_produits.add(new Boisson("Orangina", 0.45, 5, "bouteille", true));
 		
 		Distributeur<Boisson> dist = new Distributeur<Boisson>(stock_produits, stock_pieces);		
-		System.out.println("solde machine : "+dist.getSoldeMachine());
 		
-		dist.inserer_piece(dixCents);
-		dist.inserer_piece(dixCents);
 		dist.inserer_piece(cinqCents);
-		//dist.rendre_monnaie(true);
+		dist.inserer_piece(deuxCents);
+		dist.inserer_piece(cinqCents);
+		dist.inserer_piece(dixCents);
+		
 		dist.choisir_produit("Coca");
-		System.out.println("solde machine : "+dist.getSoldeMachine());
+		
+		System.out.println(dist.getSoldeMachine());
+		
+		dist.rendre_monnaie(true);
 		
 	}
 	
